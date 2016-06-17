@@ -1,16 +1,13 @@
-NS = blang
-REPO = golang-alpine
-NAME = golang-alpine
+user=hosh
+app= golang-alpine
+version=1.5.4
 
 .PHONY: build shell rm
 
 build:
-	docker build $(OPTS) -t $(NS)/$(REPO) .
+	docker build $(OPTS) -t $(user)/$(app):$(version) .
 
-shell:
-	docker run $(OPTS) --rm --name $(NAME) -i -t $(PORTS) $(VOLUMES) $(ENV) $(NS)/$(REPO) /bin/bash
-
-rm:
-	docker rm $(OPTS) $(NAME)
+push:
+	docker push $(user)/$(app):$(version)
 
 default: build
